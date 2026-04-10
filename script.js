@@ -187,5 +187,116 @@ document.addEventListener('DOMContentLoaded', function() {
     updateActiveNavOnScroll();
     updateCopyrightYear();
     handleHashLinks();
+
+        // ========== CHATBOT FUNCTIONALITY ==========
+    const chatbotContainer = document.getElementById('chatbotContainer');
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotHeader = document.getElementById('chatbotHeader');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const chatbotSend = document.getElementById('chatbotSend');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+
+    // Toggle chatbot collapse/expand
+    if (chatbotToggle && chatbotContainer) {
+        chatbotToggle.addEventListener('click', () => {
+            chatbotContainer.classList.toggle('collapsed');
+        });
+        
+        chatbotHeader.addEventListener('click', (e) => {
+            if (e.target !== chatbotToggle && !chatbotToggle.contains(e.target)) {
+                chatbotContainer.classList.toggle('collapsed');
+            }
+        });
+    }
+
+    // Chatbot responses
+    function getBotResponse(userMessage) {
+        const msg = userMessage.toLowerCase();
+        
+        if (msg.includes('price') || msg.includes('cost') || msg.includes('how much')) {
+            return "💰 My pricing varies based on project scope. Logo design starts at $150, full branding packages from $500. Would you like me to send you a detailed price list on WhatsApp?";
+        }
+        else if (msg.includes('timeline') || msg.includes('how long') || msg.includes('delivery')) {
+            return "⏰ Most projects take 5-10 business days. Rush delivery (3 days) is available with a 30% additional fee. Let me know your deadline!";
+        }
+        else if (msg.includes('logo') || msg.includes('branding')) {
+            return "🎨 I specialize in logo design and complete branding! Each project includes 3 concepts, 3 revision rounds, and all source files. Want to see some examples from my portfolio?";
+        }
+        else if (msg.includes('social media') || msg.includes('instagram') || msg.includes('facebook')) {
+            return "📱 Yes! I create scroll-stopping social media graphics including posts, stories, covers, and ad creatives. Packages start at $200/month for 20+ designs.";
+        }
+        else if (msg.includes('portfolio') || msg.includes('work')) {
+            return "🖼️ You can view my selected work in the Portfolio section above. I have experience with branding, posters, flyers, and social media designs!";
+        }
+        else if (msg.includes('contact') || msg.includes('reach') || msg.includes('call')) {
+            return "📞 You can reach me via:\n• WhatsApp: +256 706 003 669\n• Email: kareemdesign7@gmail.com\nClick the green WhatsApp button below to chat with me directly!";
+        }
+        else if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
+            return "👋 Hello! Welcome to my portfolio. How can I help you today? Feel free to ask about my services, pricing, or timeline!";
+        }
+        else if (msg.includes('thank')) {
+            return "🙏 You're welcome! I look forward to working with you. Feel free to reach out anytime!";
+        }
+        else {
+            return "🤔 Thanks for your message! For the best response, please click the green WhatsApp button below to chat with me directly. I usually reply within 1-2 hours!";
+        }
+    }
+
+    // Add message to chat
+    function addMessage(text, isUser) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chat-message ${isUser ? 'user' : 'bot'}`;
+        
+        const bubble = document.createElement('div');
+        bubble.className = 'message-bubble';
+        bubble.innerHTML = text.replace(/\n/g, '<br>');
+        
+        messageDiv.appendChild(bubble);
+        chatbotMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    // Send message function
+    function sendMessage() {
+        const message = chatbotInput.value.trim();
+        if (message === '') return;
+        
+        // Add user message
+        addMessage(message, true);
+        chatbotInput.value = '';
+        
+        // Show typing indicator
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'chat-message bot';
+        typingDiv.id = 'typingIndicator';
+        typingDiv.innerHTML = '<div class="message-bubble">✍️ Typing...</div>';
+        chatbotMessages.appendChild(typingDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        
+        // Simulate typing delay
+        setTimeout(() => {
+            // Remove typing indicator
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) indicator.remove();
+            
+            // Get and add bot response
+            const response = getBotResponse(message);
+            addMessage(response, false);
+        }, 1000);
+    }
+
+    // Event listeners
+    if (chatbotSend) {
+        chatbotSend.addEventListener('click', sendMessage);
+    }
     
+    if (chatbotInput) {
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    }
 });
