@@ -46,44 +46,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ========== PORTFOLIO DATA - REPLACE WITH YOUR OWN IMAGES ==========
-    // Just change the 'imageUrl' paths to point to YOUR images in the 'images' folder
+    // ========== PORTFOLIO DATA ==========
     const portfolioData = [
         {
-            title: "Project 1",
-            description: "my journey to designing.",
-            // CHANGE THIS: Replace 'your-project1.jpg' with your actual image filename
-            imageUrl: "images/PRIMEWEB.png"
+            title: "Brand Identity Project",
+            description: "Complete branding suite for modern startup",
+            imageUrl: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=600&h=400&fit=crop"
         },
         {
-            title: "Project 2",
-            description: "TESTING THE NEW SOFTWARE.",
-            // CHANGE THIS: Replace 'your-project2.jpg' with your actual image filename
-            imageUrl: "images/NEWTEST.png"
+            title: "Poster Design Series",
+            description: "Vibrant event posters for music festival",
+            imageUrl: "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&h=400&fit=crop"
         },
         {
-            title: "Project 3",
-            description: "NICE,CLEAN AND PROFFESIONAL LOOK.",
-            // CHANGE THIS: Replace 'your-project3.jpg' with your actual image filename
-            imageUrl: "images/PROJECT.jpg"
+            title: "Social Media Campaign",
+            description: "Instagram visuals for skincare brand",
+            imageUrl: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&h=400&fit=crop"
         },
         {
-            title: "Project 4",
-            description: "LOGO DESGIN.",
-            // CHANGE THIS: Replace 'your-project4.jpg' with your actual image filename
-            imageUrl: "images/STABEX.PNG"
+            title: "Corporate Flyer Design",
+            description: "Professional conference marketing materials",
+            imageUrl: "https://images.unsplash.com/photo-1586339949216-35c2747cc36d?w=600&h=400&fit=crop"
         },
         {
-            title: "Project 5",
-            description: "PORTIFOLIO-BUILDING",
-            // CHANGE THIS: Replace 'your-project5.jpg' with your actual image filename
-            imageUrl: "images/PORTIFOLIO.jpg"
+            title: "Logo Design Portfolio",
+            description: "Minimalist logos for fintech clients",
+            imageUrl: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=600&h=400&fit=crop"
         },
         {
-            title: "Project 6",
-            description: "BANNERS.",
-            // CHANGE THIS: Replace 'your-project6.jpg' with your actual image filename
-            imageUrl: "images/MOCKUP.jpg"
+            title: "Complete Branding Package",
+            description: "Vintage-modern identity for boutique hotel",
+            imageUrl: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop"
         }
     ];
 
@@ -92,10 +85,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const grid = document.getElementById('portfolioGrid');
         if (!grid) return;
         
-        // Clear any existing content
         grid.innerHTML = '';
         
-        // Loop through data and create items
         for (let i = 0; i < portfolioData.length; i++) {
             const item = portfolioData[i];
             
@@ -182,23 +173,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ========== RUN ALL FUNCTIONS ==========
-    createPortfolioItems();
-    updateActiveNavOnScroll();
-    updateCopyrightYear();
-    handleHashLinks();
-        // ========== CHATBOT FUNCTIONALITY ==========
+    // ========== CHATBOT FUNCTIONALITY - FIXED ==========
+    console.log("Chatbot initializing..."); // Debug log
+    
     const chatbotContainer = document.getElementById('chatbotContainer');
     const chatbotToggleBtn = document.getElementById('chatbotToggleBtn');
     const chatbotHeader = document.getElementById('chatbotHeader');
     const chatbotInput = document.getElementById('chatbotInput');
     const chatbotSend = document.getElementById('chatbotSend');
     const chatbotMessages = document.getElementById('chatbotMessages');
+    
+    console.log("Elements found:", {
+        container: !!chatbotContainer,
+        toggleBtn: !!chatbotToggleBtn,
+        header: !!chatbotHeader
+    });
 
-    // Toggle chatbot collapse/expand - FIXED
+    // SIMPLE FIX: Direct toggle function
     if (chatbotToggleBtn && chatbotContainer) {
-        chatbotToggleBtn.addEventListener('click', function(event) {
+        chatbotToggleBtn.onclick = function(event) {
             event.stopPropagation();
+            event.preventDefault();
             chatbotContainer.classList.toggle('collapsed');
             const icon = chatbotToggleBtn.querySelector('i');
             if (chatbotContainer.classList.contains('collapsed')) {
@@ -206,12 +201,13 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 icon.style.transform = 'rotate(0deg)';
             }
-        });
+            console.log("Toggled, collapsed:", chatbotContainer.classList.contains('collapsed'));
+        };
     }
     
-    // Click on header (but not on button) to toggle
-    if (chatbotHeader && chatbotContainer) {
-        chatbotHeader.addEventListener('click', function(event) {
+    // Also allow clicking on header (but not on button)
+    if (chatbotHeader && chatbotContainer && chatbotToggleBtn) {
+        chatbotHeader.onclick = function(event) {
             // Don't toggle if clicking on the toggle button
             if (event.target === chatbotToggleBtn || chatbotToggleBtn.contains(event.target)) {
                 return;
@@ -223,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 icon.style.transform = 'rotate(0deg)';
             }
-        });
+        };
     }
 
     // Chatbot responses
@@ -261,6 +257,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add message to chat
     function addMessage(text, isUser) {
+        if (!chatbotMessages) return;
+        
         const messageDiv = document.createElement('div');
         messageDiv.className = `chat-message ${isUser ? 'user' : 'bot'}`;
         
@@ -277,6 +275,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Send message function
     function sendMessage() {
+        if (!chatbotInput || !chatbotMessages) return;
+        
         const message = chatbotInput.value.trim();
         if (message === '') return;
         
@@ -304,16 +304,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     }
 
-    // Event listeners
+    // Event listeners for chat
     if (chatbotSend) {
-        chatbotSend.addEventListener('click', sendMessage);
+        chatbotSend.onclick = sendMessage;
     }
     
     if (chatbotInput) {
-        chatbotInput.addEventListener('keypress', (e) => {
+        chatbotInput.onkeypress = function(e) {
             if (e.key === 'Enter') {
                 sendMessage();
             }
-        });
+        };
     }
+
+    // ========== RUN ALL FUNCTIONS ==========
+    createPortfolioItems();
+    updateActiveNavOnScroll();
+    updateCopyrightYear();
+    handleHashLinks();
+    
+    console.log("All functions initialized!");
 });
