@@ -835,7 +835,7 @@ h2 {
 
 /* ========== CHATBOT STYLES ========== */
 .chatbot-container {
-    position: fixed;
+    position: left-bottom;
     bottom: 100px;
     right: 30px;
     width: 350px;
