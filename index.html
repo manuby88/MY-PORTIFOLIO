@@ -261,5 +261,50 @@
     </footer>
 
     <script src="script.js"></script>
+          <!-- Chatbot Widget -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header" id="chatbotHeader">
+            <div class="chatbot-header-info">
+                <i class="fas fa-comment-dots"></i>
+                <div>
+                    <h4>Kareem's Assistant</h4>
+                    <p>Online | Usually replies in minutes</p>
+                </div>
+            </div>
+            <button class="chatbot-toggle" id="chatbotToggle">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chat-message bot">
+                <div class="message-bubble">
+                    👋 Hi there! I'm Kareem's virtual assistant. 
+                    <br><br>
+                    I can help you with:
+                    <br>• Project inquiries
+                    <br>• Pricing questions
+                    <br>• Portfolio information
+                    <br>• Schedule a consultation
+                    <br><br>
+                    Or you can chat with me directly on WhatsApp by clicking the green button below!
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input-area">
+            <input type="text" id="chatbotInput" placeholder="Type your message..." class="chatbot-input">
+            <button id="chatbotSend" class="chatbot-send">
+                <i class="fas fa-paper-plane"></i>
+                </button>
+        </div>
+        <div class="chatbot-whatsapp">
+            <a href="https://wa.me/256706003669?text=Hello%20Kareem%2C%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project" 
+               class="chatbot-wa-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </body>
 </html>
