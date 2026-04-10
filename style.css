@@ -170,7 +170,7 @@ h2 {
     transform: translateY(-2px);
 }
 
-/* ========== HERO SECTION WITH NICE BACKGROUND ========== */
+/* ========== HERO SECTION ========== */
 .hero {
     position: relative;
     padding: 120px 0 100px;
@@ -342,7 +342,7 @@ h2 {
     font-size: 1.05rem;
 }
 
-/* ========== ABOUT SECTION WITH PHOTO ========== */
+/* ========== ABOUT SECTION ========== */
 .about {
     padding: 80px 0;
     background: #ffffff;
@@ -375,16 +375,6 @@ h2 {
 
 .about-image-wrapper:hover .about-photo {
     transform: scale(1.03);
-}
-
-.about-image-overlay {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(194, 123, 58, 0.9);
-    padding: 12px;
-    border-radius: 50%;
-    color: white;
 }
 
 .about-text {
@@ -562,6 +552,63 @@ h2 {
     }
 }
 
+/* ========== CLIENT PROJECT POLICY SECTION ========== */
+.policy {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.policy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.policy-card {
+    background: white;
+    padding: 30px 25px;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #eeeae5;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+}
+
+.policy-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+    border-color: #c27b3a;
+}
+
+.policy-card i {
+    font-size: 2.5rem;
+    color: #c27b3a;
+    margin-bottom: 20px;
+}
+
+.policy-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #1c1c1e;
+}
+
+.policy-card p {
+    color: #5a5a5e;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .policy-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .policy-card {
+        padding: 25px 20px;
+    }
+}
+
 /* ========== CONTACT SECTION ========== */
 .contact {
     padding: 80px 0;
@@ -711,6 +758,7 @@ h2 {
         text-align: center;
     }
 }
+
 /* ========== FLOATING WHATSAPP BUTTON ========== */
 .whatsapp-float {
     position: fixed;
@@ -783,60 +831,4 @@ h2 {
     .whatsapp-tooltip {
         display: none;
     }
-    /* ========== CLIENT PROJECT POLICY SECTION ========== */
-.policy {
-    padding: 80px 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-}
-
-.policy-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
-    margin-top: 20px;
-}
-
-.policy-card {
-    background: white;
-    padding: 30px 25px;
-    border-radius: 20px;
-    text-align: center;
-    transition: all 0.3s ease;
-    border: 1px solid #eeeae5;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
-}
-
-.policy-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
-    border-color: #c27b3a;
-}
-
-.policy-card i {
-    font-size: 2.5rem;
-    color: #c27b3a;
-    margin-bottom: 20px;
-}
-
-.policy-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-    color: #1c1c1e;
-}
-
-.policy-card p {
-    color: #5a5a5e;
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-
-@media (max-width: 768px) {
-    .policy-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .policy-card {
-        padding: 25px 20px;
-    }
-}
 }
