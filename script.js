@@ -187,24 +187,41 @@ document.addEventListener('DOMContentLoaded', function() {
     updateActiveNavOnScroll();
     updateCopyrightYear();
     handleHashLinks();
-
         // ========== CHATBOT FUNCTIONALITY ==========
     const chatbotContainer = document.getElementById('chatbotContainer');
-    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotToggleBtn = document.getElementById('chatbotToggleBtn');
     const chatbotHeader = document.getElementById('chatbotHeader');
     const chatbotInput = document.getElementById('chatbotInput');
     const chatbotSend = document.getElementById('chatbotSend');
     const chatbotMessages = document.getElementById('chatbotMessages');
 
-    // Toggle chatbot collapse/expand
-    if (chatbotToggle && chatbotContainer) {
-        chatbotToggle.addEventListener('click', () => {
+    // Toggle chatbot collapse/expand - FIXED
+    if (chatbotToggleBtn && chatbotContainer) {
+        chatbotToggleBtn.addEventListener('click', function(event) {
+            event.stopPropagation();
             chatbotContainer.classList.toggle('collapsed');
+            const icon = chatbotToggleBtn.querySelector('i');
+            if (chatbotContainer.classList.contains('collapsed')) {
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
         });
-        
-        chatbotHeader.addEventListener('click', (e) => {
-            if (e.target !== chatbotToggle && !chatbotToggle.contains(e.target)) {
-                chatbotContainer.classList.toggle('collapsed');
+    }
+    
+    // Click on header (but not on button) to toggle
+    if (chatbotHeader && chatbotContainer) {
+        chatbotHeader.addEventListener('click', function(event) {
+            // Don't toggle if clicking on the toggle button
+            if (event.target === chatbotToggleBtn || chatbotToggleBtn.contains(event.target)) {
+                return;
+            }
+            chatbotContainer.classList.toggle('collapsed');
+            const icon = chatbotToggleBtn.querySelector('i');
+            if (chatbotContainer.classList.contains('collapsed')) {
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
             }
         });
     }
